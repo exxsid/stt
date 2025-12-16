@@ -17,4 +17,11 @@ if uploaded_file:
         temperature=0,
         response_format="verbose_json",
     )
-    st.write(transcription.text)
+    for segment in transcription.segments:
+        # covert the seconds to minutes:seconds format
+        start_minutes = int(segment.get("start") // 60)
+        start_seconds = int(segment.get("start") % 60)
+        end_minutes = int(segment.get("end") // 60)
+        end_seconds = int(segment.get("end") % 60)
+        
+        st.markdown(f"**[{start_minutes}:{start_seconds:02d} - {end_minutes}:{end_seconds:02d}]** {segment.get('text')}")
