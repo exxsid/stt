@@ -8,7 +8,7 @@ load_dotenv()
 client = Groq(
     api_key=os.getenv("API_KEY")
 )
-uploaded_file = st.file_uploader("upload an mp3 file", type=["mp3", "wav"])
+uploaded_file = st.file_uploader("upload an mp3 file", type=["mp3", "wav", "m4a"])
 if uploaded_file:
     bytes_data = uploaded_file.getvalue()
     transcription = client.audio.transcriptions.create(
